@@ -1,7 +1,5 @@
 # flutterwavechallenge_server
 
-This project was generated with [BàngáJS](https://bangajs.netlify.app/) v1.0.0.  
-
 ## Installation
 
 1. Install dependencies - `npm install`
