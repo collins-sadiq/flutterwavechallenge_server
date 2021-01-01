@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { BCRYPT_SALT } = require("./../config")
+const { BCRYPT_SALT } = require("./../config");
 const Schema = mongoose.Schema;
-
 
 const userSchema = new Schema(
   {
@@ -17,34 +16,47 @@ const userSchema = new Schema(
       unique: true,
       required: [true, "Email is required"],
     },
+    phoneNumber: {
+      type: String,
+      trim: true,
+      unique: true,
+      required: [true, "Phone number is required"],
+    },
     password: {
       type: String,
     },
-    image: {
+    logo: {
       type: String,
     },
     role: {
       type: String,
       trim: true,
-      enum: ["user", "admin"],
-      default: "user"
+      enum: ["merchants", "user", "admin"],
+      default: "user",
     },
     isActive: {
+      type: Boolean,
+      default: true,
+    },
+    isApproved: {
       type: Boolean,
       default: true,
     },
     isVerified: {
       type: Boolean,
       default: false,
-    }
+    },
+    flwSucbAccount: {
+      type: String,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified('password')) return next()
+  if (!this.isModified("password")) return next();
 
   const hash = await bcrypt.hash(this.password, BCRYPT_SALT);
   this.password = hash;
@@ -52,6 +64,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-
-
-module.exports = mongoose.model('users', userSchema)
+module.exports = mongoose.model("users", userSchema);

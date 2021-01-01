@@ -1,10 +1,13 @@
 const AuthServ = require("../services/auth.service");
+const { createSubAccount } = require("../utils/flw");
 const response = require("../utils/response");
 
 class AuthContoller {
   async signup(req, res) {
-    const result = await AuthServ.signup(req.body);
-    res.status(201).send(response("User created", result));
+    const result = await createSubAccount();
+    console.log(result)
+    // const result = await AuthServ.signup(req.body);
+    // res.status(201).send(response("User created", result));
   }
 
   async signin(req, res) {
