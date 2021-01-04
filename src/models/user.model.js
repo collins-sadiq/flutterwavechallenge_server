@@ -31,7 +31,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       trim: true,
-      enum: ["merchants", "user", "admin"],
+      enum: ["merchant", "user", "admin"],
       default: "user",
     },
     isActive: {
@@ -46,8 +46,11 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    flwSucbAccount: {
-      type: String,
+    flwSubAccount: {
+      type: Object,
+    },
+    rider: {
+      type: Object,
     },
   },
   {

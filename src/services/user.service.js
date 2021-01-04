@@ -1,5 +1,6 @@
 const User = require("./../models/user.model");
 const CustomError = require("./../utils/custom-error");
+
 class UserService {
   async create(data) {
     return await new User(data).save();
